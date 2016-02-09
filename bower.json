@@ -1,6 +1,7 @@
 {
   "name": "books",
   "version": "0.1.0",
-  "dependencies": {}
+  "dependencies": {
+    "material-design-lite": "^1.1.1"
+  }
 }
-

@@ -1,43 +1,45 @@
 import React from 'react';
-import TodoStore from '../stores/TodoStore';
-import ActionCreator from '../actions/TodoActionCreators';
+// import TodoStore from '../stores/TodoStore';
+// import ActionCreator from '../actions/TodoActionCreators';
+import BookStore from '../stores/BookStore';
+import ActionCreator from '../actions/BooksActionCreators';
 import App from './App.jsx';
 
 export default React.createClass({
   _onChange() {
-    this.setState(TodoStore.getAll());
+    this.setState(BookStore.getAll());
   },
 
   getInitialState() {
-    return TodoStore.getAll();
+    return BookStore.getAll();
   },
 
   componentDidMount() {
-    TodoStore.addChangeListener(this._onChange);
+    BookStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
-    TodoStore.removeChangeListener(this._onChange);
+    BookStore.removeChangeListener(this._onChange);
   },
 
-  handleAddTask(e) {
-    let title = prompt('Enter task title:');
-    if (title) {
-      ActionCreator.addItem(title);
-    }
-  },
+  // handleAddTask(e) {
+  //   let title = prompt('Enter task title:');
+  //   if (title) {
+  //     ActionCreator.addItem(title);
+  //   }
+  // },
 
   handleClear(e) {
     ActionCreator.clearList();
   },
 
   render() {
-    let {tasks} = this.state;
+    // let {tasks} = this.state;
+    let {books} = this.state;
     return (
       <App
-        onAddTask={this.handleAddTask}
         onClear={this.handleClear}
-        tasks={tasks} />
+        books={books} />
     );
   }
 });

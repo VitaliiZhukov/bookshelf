@@ -14,7 +14,16 @@ export default React.createClass({
     let {books} = this.props;
 
     return (
-      <p>Hello, world!!!</p>
+      <div>
+        {(books.length === 0) ? 
+          <div>
+            Читайте!
+          </div> : 
+          false
+        }
+        <div className='shelf__background'>
+        </div>
+      </div>
     );
   }
 });

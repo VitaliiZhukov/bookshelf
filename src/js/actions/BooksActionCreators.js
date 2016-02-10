@@ -21,11 +21,9 @@ export default {
     });
   },
 
-  clearList() {
-    console.warn('clearList action not yet implemented...');
-  },
-
-  completeTask(task) {
-    console.warn('completeTask action not yet implemented...', task);
+  collapseOtherBooks(){
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.BOOKS_COLLAPSED,
+    });
   }
 };

@@ -8,7 +8,8 @@ let _data = [];
 
 // add private functions to modify data
 function addBook(author, title, descr, rating) {
-  _data = _data.concat({author, title, descr, rating});
+  let id = Math.max.apply(Math,_data.map(function(d){return d.id;}))+1;
+  _data = _data.concat({id, author, title, descr, rating});
 }
 
 // Facebook style store creation.
@@ -28,7 +29,7 @@ const BookStore = assign({}, BaseStore, {
     case Constants.ActionTypes.BOOK_ADDED:
       const author = action.author.trim();
       const bookTitle = action.bookTitle.trim();
-      const description = action.description;
+      const description = action.description.trim();
       const rating = action.rating;
       // NOTE: if this action needs to wait on another store:
       // Dispatcher.waitFor([OtherStore.dispatchToken]);
@@ -40,12 +41,8 @@ const BookStore = assign({}, BaseStore, {
       break;
     case Constants.ActionTypes.BOOKS_LOADED:
       _data = action.books.books;
+      BookStore.emitChange();
       break;
-
-
-    // add more cases for other actionTypes...
-
-    // no default
     }
   })
 });

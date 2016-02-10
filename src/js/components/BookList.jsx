@@ -28,8 +28,12 @@ export default React.createClass({
     this.ascending = !this.ascending;
 
     books = books.sort(function(a,b){
-      let nameA=a[property].toLowerCase(), 
-          nameB=b[property].toLowerCase();
+      let nameA=a[property], 
+          nameB=b[property];
+      if (typeof nameA === 'string'){
+        nameA = nameA.toLowerCase();
+        nameB = nameB.toLowerCase();
+      }
       if (nameA < nameB)
         return -1;
       if (nameA > nameB)
@@ -49,11 +53,11 @@ export default React.createClass({
       <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           <tr>
-            <th onClick={this.sortBy.bind(this,'title')}>Название</th>
-            <th onClick={this.sortBy.bind(this,'author')}>Автор</th>
-            <th>Жанр</th>
-            <th>Описание</th>
-            <th>Оценка</th>
+            <th onClick={this.sortBy.bind(this,'title')} className="mdl-data-table__cell--non-numeric pointer">Название</th>
+            <th onClick={this.sortBy.bind(this,'author')} className="mdl-data-table__cell--non-numeric pointer">Автор</th>
+            <th className="mdl-data-table__cell--non-numeric">Жанр</th>
+            <th className="mdl-data-table__cell--non-numeric">Описание</th>
+            <th onClick={this.sortBy.bind(this,'rating')} className="pointer">Оценка</th>
             <th></th>
           </tr>
         </thead>

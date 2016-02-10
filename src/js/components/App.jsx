@@ -5,28 +5,26 @@ import NewBook from './NewBook.jsx';
 
 export default React.createClass({
   propTypes: {
-    // tasks: PropTypes.array.isRequired,
     books: PropTypes.array.isRequired,
-    //onAddBook: PropTypes.func.isRequired,
-    onClear: PropTypes.func.isRequired
+    // onAddBook: PropTypes.func.isRequired,
   },
 
   getDefaultProps() {
     return {
-      // tasks: [],
       books:[]
     }
   },
 
   render() {
-    let {onAddBook, onClear, books} = this.props;
+    let {onAddBook, books} = this.props;
     return (
-      <div className="container">
-        <BookList books={books} />
-
-        <br />
-
-        <NewBook />
+      <div className="wrapper">
+        <div className="left-column__wrapper">
+          <NewBook />
+        </div>
+        <div className="right-column__wrapper">
+          <BookList books={books} />
+        </div>
       </div>
     );
   }

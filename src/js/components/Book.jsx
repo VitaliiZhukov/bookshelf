@@ -28,12 +28,13 @@ export default React.createClass({
 
   render() {
     let {book} = this.props;
+    let descr = book.descr.length>=30?book.descr.substr(0,30).trim()+'...':book.descr;
     return (
       <tr onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
-        <td className="mdl-data-table__cell--non-numeric">{book.title}</td>
+        <td>{book.title}</td>
         <td>{book.author}</td>
         <td>{book.genre}</td>
-        <td>{book.descr}</td>
+        <td>{descr}</td>
         <td>{book.rating}</td>
         <td>
           {this.state.isHovering ? <div className="book__remove book__remove--visible"></div> : <div className="book__remove"></div> }

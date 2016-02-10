@@ -14,6 +14,13 @@ export default {
     });
   },
 
+  loadBooks(books){
+    Dispatcher.handleServerAction({
+      type: Constants.ActionTypes.BOOKS_LOADED,
+      books: books
+    });
+  },
+
   clearList() {
     console.warn('clearList action not yet implemented...');
   },

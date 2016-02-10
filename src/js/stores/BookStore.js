@@ -38,6 +38,10 @@ const BookStore = assign({}, BaseStore, {
         BookStore.emitChange();
       }
       break;
+    case Constants.ActionTypes.BOOKS_LOADED:
+      _data = action.books.books;
+      break;
+
 
     // add more cases for other actionTypes...
 

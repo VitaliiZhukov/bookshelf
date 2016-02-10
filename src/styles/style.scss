@@ -7,7 +7,12 @@
 
 table{
 	width: 90%;
+	max-width:900px;
 	margin: 0 auto;
+}
+
+thead{
+	cursor:pointer;
 }
 
 .new-book__container{

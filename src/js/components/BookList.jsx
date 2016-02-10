@@ -46,9 +46,12 @@ export default React.createClass({
     this.setState({books:books});
   },
 
+  handleHeight(id){
+    this.setState({ fullHeightId : id});
+  },
+
   render() {
     let {books} = this.props;
-
     return (
       <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
@@ -63,7 +66,12 @@ export default React.createClass({
         </thead>
         <tbody>
           {books.map(book =>
-            <Book book={book} key={book.id} />
+            <Book 
+              book={book} 
+              key={book.id} 
+              handleClick={this.handleHeight}
+              fullHeight={this.state.fullHeightId === book.id}
+              />
           )}
         </tbody>
       </table>

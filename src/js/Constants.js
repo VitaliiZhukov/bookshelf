@@ -7,8 +7,7 @@ export default {
   // Each time you add an action, add it here... They should be past-tense
   ActionTypes: keyMirror({
     BOOK_ADDED: null,
-    BOOKS_LOADED: null,
-    BOOKS_COLLAPSED: null
+    BOOKS_LOADED: null
   }),
 
   ActionSources: keyMirror({

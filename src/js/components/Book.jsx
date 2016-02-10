@@ -6,8 +6,7 @@ import Constants from '../Constants';
 export default React.createClass({
   getInitialState() {
     return {
-      isHovering: false,
-      fullHeight: false
+      isHovering: false
     };
   },
 
@@ -20,24 +19,22 @@ export default React.createClass({
   componentDidMount() {
   },
 
-  dispatcherIndex: Dispatcher.register(function handleAction(payload) {
-    if (payload.action.type === Constants.ActionTypes.BOOKS_COLLAPSED){
-      // this.setState({ fullHeight: false });
-    }
-  }),
-
   handleHover (val) {
     this.setState({ isHovering: val });
   },
 
-  handleClick () {
-    ActionCreator.collapseOtherBooks();
-    this.setState({ fullHeight: (!this.state.fullHeight) });
+  handleDescriptionClick (id) {
+    if (this.props.fullHeight){
+      this.props.handleClick(-1); // Pass event to parent component (BookList)
+    }
+    else{
+      this.props.handleClick(id); // Row height collapsed 
+    }
   },
 
   render() {
     let {book} = this.props;
-    let descr = this.state.fullHeight?book.descr:book.descr.substr(0,30).trim()+'...';
+    let descr = (this.props.fullHeight)?book.descr:book.descr.substr(0,30).trim()+'...';
     return (
       <tr 
         onMouseOver={this.handleHover.bind(this,true)} 
@@ -45,7 +42,7 @@ export default React.createClass({
         <td className="mdl-data-table__cell--non-numeric books-table__title">{book.title}</td>
         <td className="mdl-data-table__cell--non-numeric">{book.author}</td>
         <td className="mdl-data-table__cell--non-numeric">{book.genre}</td>
-        <td className="mdl-data-table__cell--non-numeric books-table__description" onClick={this.handleClick}>{descr}</td>
+        <td className="mdl-data-table__cell--non-numeric books-table__description" onClick={this.handleDescriptionClick.bind(this,book.id)}>{descr}</td>
         <td>{book.rating}</td>
         <td>
           {this.state.isHovering ? <div className="book__remove book__remove--visible"></div> : <div className="book__remove"></div> }

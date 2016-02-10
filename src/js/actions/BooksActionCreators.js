@@ -19,11 +19,5 @@ export default {
       type: Constants.ActionTypes.BOOKS_LOADED,
       books: books
     });
-  },
-
-  collapseOtherBooks(){
-    Dispatcher.handleViewAction({
-      type: Constants.ActionTypes.BOOKS_COLLAPSED,
-    });
   }
 };

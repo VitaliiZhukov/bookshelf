@@ -18,7 +18,6 @@ export default assign(new Dispatcher(), {
       source: Constants.ActionSources.SERVER_ACTION,
       action: action
     });
-    console.log(action);
   },
 
   /**

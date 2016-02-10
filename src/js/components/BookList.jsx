@@ -6,49 +6,51 @@ import ActionCreator from '../actions/BooksActionCreators';
 export default React.createClass({
   getDefaultProps() {
     return {
-      books: []
+      books: [],
+      ascending: false
     };
   },
 
   componentWillMount() {
-    var self = this;
     $.getJSON('../data/books.json',function(result){
-        self.props = result;
-        self.setState({books:result});
-        self.onLoadBooks();
-        // self.setState({books:result});
-    });
+        this.props = result;
+        this.setState({books:result});
+        this.onLoadBooks();
+    }.bind(this));
   },
 
   onLoadBooks(){
     ActionCreator.loadBooks(this.props);
   },
 
-  handleSort(propertyName){
-    console.log(propertyName);
-    // this.sortParam = propertyName;
-    // this.render;
-  },
+  sortBy(property){
+    let {books} = this.props;
+    this.ascending = !this.ascending;
 
-  compare(a,b) {
-    if (a.title < b.title)
-      return -1;
-    else if (a.title > b.title)
-      return 1;
-    else 
-      return 0;
+    books = books.sort(function(a,b){
+      let nameA=a[property].toLowerCase(), 
+          nameB=b[property].toLowerCase();
+      if (nameA < nameB)
+        return -1;
+      if (nameA > nameB)
+        return 1;
+      return 0
+    });
+
+    if (!this.ascending)
+      books.reverse();
+    this.setState({books:books});
   },
 
   render() {
     let {books} = this.props;
-    books.sort(this.compare);
 
     return (
       <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           <tr>
-            <th onClick={this.handleSort('title')}>Название</th>
-            <th>Автор</th>
+            <th onClick={this.sortBy.bind(this,'title')}>Название</th>
+            <th onClick={this.sortBy.bind(this,'author')}>Автор</th>
             <th>Жанр</th>
             <th>Описание</th>
             <th>Оценка</th>

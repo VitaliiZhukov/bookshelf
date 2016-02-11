@@ -17,7 +17,6 @@ export default React.createClass({
   onAddBook(){
     const descr = this.state.descr || '';
     const rating = this.state.rating ? parseInt(this.state.rating):0;
-    console.log(typeof rating);
     ActionCreator.addBook(this.state.bookTitle,this.state.author,descr,rating);
     this.replaceState(this.getInitialState())
   },

@@ -21,10 +21,15 @@ export default {
     });
   },
 
-  loadBooks(books){
-    Dispatcher.handleServerAction({
-      type: Constants.ActionTypes.BOOKS_LOADED,
-      books: books
+  // loadBooks(books){
+  //   Dispatcher.handleServerAction({
+  //     type: Constants.ActionTypes.BOOKS_LOADED,
+  //     books: books
+  //   });
+  // }
+  loadBooks(){
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.BOOKS_LOAD
     });
   }
 };

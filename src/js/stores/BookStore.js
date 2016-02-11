@@ -2,6 +2,7 @@ import Dispatcher from '../Dispatcher';
 import Constants from '../Constants';
 import BaseStore from './BaseStore';
 import assign from 'object-assign';
+import $ from 'jquery/dist/jquery.min.js';
 
 // data storage
 let _data = [];
@@ -44,14 +45,17 @@ const BookStore = assign({}, BaseStore, {
         BookStore.emitChange();
       }
       break;
-    case Constants.ActionTypes.BOOKS_LOADED:
-      _data = action.books.books;
-      BookStore.emitChange();
-      break;
     case Constants.ActionTypes.BOOK_REMOVED:
       const id = action.id;
       removeBook(id);
       BookStore.emitChange();
+      break;
+    case Constants.ActionTypes.BOOKS_LOAD:
+      $.getJSON('./data/books.json',function(result){ // Load json file from server. Probably should be realized in Store gist in flux. 
+          _data = result.books;
+          BookStore.emitChange();
+          console.log(_data);
+      });
       break;
     }
   })

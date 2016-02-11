@@ -1,7 +1,6 @@
 import React from 'react';
 import Book from './Book.jsx';
-import $ from 'jquery/dist/jquery.min.js';
-import ActionCreator from '../actions/BooksActionCreators';
+// import ActionCreator from '../actions/BooksActionCreators';
 
 export default React.createClass({
   getInitialState() {
@@ -15,18 +14,6 @@ export default React.createClass({
     return {
       books: []
     };
-  },
-
-  componentWillMount() {
-    $.getJSON('./data/books.json',function(result){ // Load json file from server. Probably should be realized in Store gist in flux. 
-        this.props = result;
-        this.setState({books:result});
-        this.onLoadBooks();
-    }.bind(this));
-  },
-
-  onLoadBooks(){
-    ActionCreator.loadBooks(this.props);
   },
 
   sortBy(property){

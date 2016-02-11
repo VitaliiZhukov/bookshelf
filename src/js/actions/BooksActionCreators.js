@@ -14,6 +14,13 @@ export default {
     });
   },
 
+  removeBook(id) {
+    Dispatcher.handleViewAction({
+      type: Constants.ActionTypes.BOOK_REMOVED,
+      id: id
+    });
+  },
+
   loadBooks(books){
     Dispatcher.handleServerAction({
       type: Constants.ActionTypes.BOOKS_LOADED,

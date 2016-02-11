@@ -5,6 +5,8 @@ html,body{
 	line-height: 1.25em;
 	height:100%;
 	color: #757575;
+	max-width: 1280px;
+	margin: 0 auto;
 }
 
 .shelf__background{
@@ -19,16 +21,17 @@ html,body{
 }
 .left-column__wrapper{
 	display: inline-block;
-	float: left;
 	padding:10px;
+	width: 340px;
+	float: left;
 }
 .right-column__wrapper{
 	display: inline-block;
 	padding:10px;
 }
 table{
-	width: 90%;
-	max-width:900px;
+	width: 900px;
+	// max-width:900px;
 	margin: 0 auto;
 	thead  .pointer{
 		cursor: pointer;
@@ -39,7 +42,7 @@ table{
 		}
 		.books-table__description{
 			font-family: RobotoLight;
-			max-width: 300px;
+			width: 400px;
 			white-space: normal;
 			cursor: pointer;
 			text-align: justify;

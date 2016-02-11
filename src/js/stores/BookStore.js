@@ -12,6 +12,11 @@ function addBook(author, title, descr, rating) {
   _data = _data.concat({id, author, title, descr, rating});
 }
 
+function removeBook(id) {
+  let ind = _data.map(function(d) {return d.id; }).indexOf(id);
+  _data.splice(ind,1);
+}
+
 // Facebook style store creation.
 const BookStore = assign({}, BaseStore, {
   // public methods used by Controller-View to operate on data
@@ -41,6 +46,11 @@ const BookStore = assign({}, BaseStore, {
       break;
     case Constants.ActionTypes.BOOKS_LOADED:
       _data = action.books.books;
+      BookStore.emitChange();
+      break;
+    case Constants.ActionTypes.BOOK_REMOVED:
+      const id = action.id;
+      removeBook(id);
       BookStore.emitChange();
       break;
     }

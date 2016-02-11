@@ -44,8 +44,8 @@
     "flux": "^2.1.1",
     "gulp-eslint": "^1.1.1",
     "jquery": "^2.2.0",
+    "material-design-lite": "^1.1.1",
     "object-assign": "^4.0.1",
-    "react": "^0.13.3",
-    "react-bootstrap": "^0.28.2"
+    "react": "^0.13.3"
   }
 }

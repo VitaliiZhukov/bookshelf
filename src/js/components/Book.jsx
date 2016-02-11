@@ -6,7 +6,7 @@ import Constants from '../Constants';
 export default React.createClass({
   getInitialState() {
     return {
-      isHovering: false
+      isHovering: false // Used for close button display.
     };
   },
 
@@ -46,10 +46,18 @@ export default React.createClass({
         <td className="mdl-data-table__cell--non-numeric books-table__title">{book.title}</td>
         <td className="mdl-data-table__cell--non-numeric">{book.author}</td>
         <td className="mdl-data-table__cell--non-numeric">{book.genre}</td>
-        <td className="mdl-data-table__cell--non-numeric books-table__description" onClick={this.handleDescriptionClick.bind(this,book.id)}>{descr}</td>
-        <td>{book.rating}</td>
+        <td className="mdl-data-table__cell--non-numeric books-table__description" 
+            onClick={this.handleDescriptionClick.bind(this,book.id)}>{descr}</td>
+        <td>{book.rating!==0?book.rating:''}</td>
         <td>
-          {this.state.isHovering ? <div className="book__remove book__remove--visible" onClick={this.removeBook.bind(this,book.id)}></div> : <div className="book__remove"></div> }
+          {this.state.isHovering ? 
+            <div 
+              className="book__remove book__remove--visible" 
+              onClick={this.removeBook.bind(this,book.id)}>
+            </div> : 
+            <div 
+              className="book__remove">
+            </div> }
         </td>
       </tr>
     );

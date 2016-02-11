@@ -37,5 +37,17 @@ module.exports = {
   watch: {
     src: 'src/**/*.*',
     tasks: ['build']
+  },
+  copyData: {
+    src: 'src/data/*.*',
+    dest: dest+'/data'
+  },  
+  copyFonts: {
+    src: 'src/fonts/**/*.*',
+    dest: dest+'/fonts/'
+  },  
+  copyImg: {
+    src: 'src/img/*.*',
+    dest: dest+'/img/'
   }
 };

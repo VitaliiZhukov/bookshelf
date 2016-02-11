@@ -20,15 +20,10 @@ export default React.createClass({
     BookStore.removeChangeListener(this._onChange);
   },
 
-  handleClear(e) {
-    ActionCreator.clearList();
-  },
-
   render() {
     let {books} = this.state;
     return (
       <App
-        onClear={this.handleClear}
         books={books} />
     );
   }

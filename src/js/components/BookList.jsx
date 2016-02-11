@@ -4,15 +4,21 @@ import $ from 'jquery/dist/jquery.min.js';
 import ActionCreator from '../actions/BooksActionCreators';
 
 export default React.createClass({
+  getInitialState() {
+    return {
+      ascending: false,
+      fullHeightId: -1
+    };
+  },
+
   getDefaultProps() {
     return {
-      books: [],
-      ascending: false
+      books: []
     };
   },
 
   componentWillMount() {
-    $.getJSON('../data/books.json',function(result){
+    $.getJSON('./data/books.json',function(result){ // Load json file from server. Probably should be realized in Store gist in flux. 
         this.props = result;
         this.setState({books:result});
         this.onLoadBooks();
@@ -25,29 +31,29 @@ export default React.createClass({
 
   sortBy(property){
     let {books} = this.props;
-    this.ascending = !this.ascending;
+    this.setState({ascending: !this.state.ascending},function(){ // Change sort order and start sorting books array by selected property.
+      books = books.sort(function(a,b){
+        let nameA=a[property], 
+            nameB=b[property];
+        if (typeof nameA === 'string'){
+          nameA = nameA.toLowerCase();
+          nameB = nameB.toLowerCase();
+        }
+        if (nameA < nameB)
+          return -1;
+        if (nameA > nameB)
+          return 1;
+        return 0
+      });
 
-    books = books.sort(function(a,b){
-      let nameA=a[property], 
-          nameB=b[property];
-      if (typeof nameA === 'string'){
-        nameA = nameA.toLowerCase();
-        nameB = nameB.toLowerCase();
-      }
-      if (nameA < nameB)
-        return -1;
-      if (nameA > nameB)
-        return 1;
-      return 0
+      if (!this.state.ascending)
+        books.reverse();
+      this.setState({books:books});
     });
-
-    if (!this.ascending)
-      books.reverse();
-    this.setState({books:books});
   },
 
   handleHeight(id){
-    this.setState({ fullHeightId : id});
+    this.setState({ fullHeightId : id}); // Set Id of the row that will be full heighted in the table. If id is -1 then all rows are collapsed.
   },
 
   render() {
